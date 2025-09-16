@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Concrete.Post>
+
+<h2>Yazılar</h2>
+
+@foreach (var p in Model)
+{
+    <div class="mb-3 border-bottom pb-2">
+        <h3><a href="/posts/@p.Slug">@p.Title</a></h3>
+        <div class="text-muted">
+            @p.CreatedDate.ToLocalTime() • @p.Category?.Name
+        </div>
+        <p>@(p.Content?.Length > 160 ? p.Content.Substring(0, 160) + "..." : p.Content)</p>
+        <a class="btn btn-sm btn-outline-primary" href="/posts/@p.Slug">Oku</a>
+        <span class="ms-2 text-muted">/@p.Slug</span>
+    </div>
+}

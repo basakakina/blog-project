@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "WEB.Controllers.CategoryAPIController",
+    "Method": "GetAll",
+    "RelativePath": "api/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

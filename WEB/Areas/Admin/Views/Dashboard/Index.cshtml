@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<h2 class="mb-4">Admin Panel</h2>
+
+<div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-area="Admin" asp-controller="Posts" asp-action="Create" class="btn btn-primary w-100 py-3">
+            Post ekle
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-area="Admin" asp-controller="Categories" asp-action="Create" class="btn btn-primary w-100 py-3">
+            Kategori ekle
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-area="Admin" asp-controller="Tags" asp-action="Create" class="btn btn-primary w-100 py-3">
+            Tag ekle
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-controller="Post" asp-action="Index" class="btn btn-outline-primary w-100 py-3">
+            Published Posts
+        </a>
+    </div>
+</div>

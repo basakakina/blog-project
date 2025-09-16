@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Concrete.Post>
+
+<h2>Postlar</h2>
+<form method="post" asp-action="Create">
+    <input type="text" name="title" placeholder="Title" />
+    <textarea name="content" placeholder="Content"></textarea>
+    <button type="submit">Add</button>
+</form>
+
+<ul>
+    @foreach (var p in Model)
+    {
+        <li><b>@p.Name</b> — @p.CreatedDate.ToString("g")</li>
+    }
+</ul>

@@ -1,0 +1,14 @@
+﻿@model ApplicationCore.Entities.Concrete.Category
+<h2>Kategori Oluştur</h2>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Slug</label>
+        <input asp-for="Slug" class="form-control" />
+    </div>
+    <button class="btn btn-primary">Save</button>
+</form>

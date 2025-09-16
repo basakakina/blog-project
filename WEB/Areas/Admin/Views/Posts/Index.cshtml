@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Concrete.Post>
+@{
+    ViewData["Title"] = "Posts";
+}
+<h2>Posts</h2>
+<p><a asp-action="Create" class="btn btn-primary">Create</a></p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Tags</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            var tags = (p.PostTags ?? new List<ApplicationCore.Entities.Concrete.PostTag>())
+            .Select(pt => pt.Tag?.Name)
+            .Where(n => !string.IsNullOrWhiteSpace(n));
+            <tr>
+                <td>@p.Title</td>
+                <td>@p.Category?.Name</td>
+                <td>@string.Join(", ", tags)</td>
+                <td>@(p.IsPublished ? "Published" : "Draft")</td>
+                <td>@p.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-secondary">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@p.Id" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

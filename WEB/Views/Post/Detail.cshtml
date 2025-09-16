@@ -1,0 +1,61 @@
+﻿@using System.Security.Claims
+@model ApplicationCore.Entities.Concrete.Post
+
+<h1>@Model.Title</h1>
+<p>@Model.Content</p>
+
+<hr />
+<h3>Yorumlar</h3>
+
+@if (Model.Comments != null && Model.Comments.Any())
+{
+    foreach (var c in Model.Comments.OrderByDescending(x => x.CreatedDate))
+    {
+        <div class="comment border p-2 mb-2">
+            <div class="meta">
+                <strong>@(c.Author?.UserName ?? "Kullanıcı")</strong> – @c.CreatedDate.ToLocalTime()
+            </div>
+            <div class="body">@c.Content</div>
+
+            @{
+                // Giriş yapan kullanıcının id'si
+                var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                bool hasGuid = Guid.TryParse(idStr, out Guid currentUserId);
+            }
+            @* Yorum silme butonu: sadece sahibi veya Admin/Author görsün *@
+            @if (User.Identity?.IsAuthenticated == true &&
+                (User.IsInRole("Admin") || User.IsInRole("Author") ||
+                (hasGuid && c.AuthorId == currentUserId)))
+            {
+                <form method="post" action="/comments/@c.Id/delete">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                </form>
+            }
+        </div>
+    }
+}
+else
+{
+    <p>Henüz yorum yok.</p>
+}
+
+<hr />
+<h3>Yorum Yap</h3>
+
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <form method="post" action="/posts/@Model.Slug/comments">
+        @Html.AntiForgeryToken()
+        <textarea name="content" rows="3" class="form-control" required maxlength="2000"></textarea>
+        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+        <button type="submit" class="btn btn-primary mt-2">Gönder</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-info">
+        Yorum yapmak için <a href="/Account/Login?returnUrl=@Context.Request.Path">giriş yapın</a>.
+    </div>
+}

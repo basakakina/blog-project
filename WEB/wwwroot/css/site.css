@@ -1,0 +1,60 @@
+:root {
+    --brand: #7c3aed;
+    --brand-600: #6d28d9;
+    --brand-200: #ddd6fe;
+    --dark: #111827;
+}
+
+.navbar-dark.bg-dark {
+    background-color: var(--dark) !important;
+}
+
+a, .nav-link {
+    color: var(--brand)
+}
+
+    a:hover, .nav-link:hover {
+        color: var(--brand-600)
+    }
+
+.btn-primary {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+    .btn-primary:hover {
+        background-color: var(--brand-600);
+        border-color: var(--brand-600);
+    }
+
+.btn-outline-primary {
+    color: var(--brand);
+    border-color: var(--brand);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+    }
+
+/* Ýstersen btn-warning'ý da mora çevir: */
+.btn-warning {
+    background-color: var(--brand) !important;
+    border-color: var(--brand) !important;
+    color: #fff !important;
+}
+
+    .btn-warning:hover {
+        background-color: var(--brand-600) !important;
+        border-color: var(--brand-600) !important;
+    }
+
+.badge.bg-light, .text-bg-light {
+    background-color: var(--brand-200) !important;
+    color: var(--dark) !important;
+}
+
+body.bg-light {
+    background-color: #f6f6fa !important;
+}
